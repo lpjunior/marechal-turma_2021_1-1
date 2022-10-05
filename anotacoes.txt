@@ -1,0 +1,10 @@
+-- para preparar o ambiente
+  -> Instalar o nodeJS (angular, react, nextJS, next, vue.js)
+  -> Angular CLI
+  -> IDE
+-- para criar um projeto usamos o comando
+ng new <name_app>
+  - durante a criação
+  -> Angular rounting -> definição de rotas que a aplição terá
+  -> Tipo o css (.css, .scss., .sass, .less)
+  -> Permissão para coletar dados de desenvolvimento
