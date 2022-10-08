@@ -1,0 +1,36 @@
+<div>
+  <form [formGroup]="calculadoraForm" (submit)="processaCalculo()"  class="calculadora-form">
+    <div>
+      <div class="calculadora-full-width">
+        <label for="primerio-numero">Primeiro Numero</label>
+        <input type="number" id="primerio-numero" formControlName="primeiroNumero" placeholder="Primeiro número">
+        <div *ngIf="primeiroNumero.errors?.['required']">
+          <i style="color: red">operador é requerido</i>
+        </div>
+      </div>
+      <div class="calculadora-full-width">
+        <label for="segundo-numero">Segundo Numero</label>
+        <input type="number" id="segundo-numero" formControlName="segundoNumero" placeholder="Segundo número">
+        <div *ngIf="segundoNumero.errors?.['required']">
+          <i style="color: red">operador é requerido</i>
+        </div>
+      </div>
+      <div class="calculadora-full-width">
+        <label for="operador">Operador</label>
+        <input type="text" id="operador" formControlName="operador" placeholder="operador">
+        <div *ngIf="operador.pending">Validating...</div>
+        <div *ngIf="operador.invalid" class="alert alert-danger operador-errors">
+          <div *ngIf="operador.errors?.['required']">
+            <i style="color: red">operador é requerido</i>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button mat-button color="primary" id="btnCalcula" type="submit" [disabled]="calculadoraForm.invalid">Calcular</button>
+      </div>
+    </div>
+  </form>
+  <div>
+    resultado: {{resultado}}
+  </div>
+</div>
