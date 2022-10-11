@@ -1,36 +1,50 @@
 <div>
   <form [formGroup]="calculadoraForm" (submit)="processaCalculo()"  class="calculadora-form">
-    <div>
-      <div class="calculadora-full-width">
-        <label for="primerio-numero">Primeiro Numero</label>
-        <input type="number" id="primerio-numero" formControlName="primeiroNumero" placeholder="Primeiro número">
-        <div *ngIf="primeiroNumero.errors?.['required']">
-          <i style="color: red">operador é requerido</i>
-        </div>
+    <section>
+      <mat-form-field class="calculadora-full-width" appearance="fill">
+        <mat-label>Primeiro número</mat-label>
+        <input matInput type="number" id="primerio-numero" formControlName="primeiroNumero" placeholder="Primeiro número" required>
+        <mat-error *ngIf="primeiroNumero.errors?.['required']">
+          <i style="color: red">campo obrigatório</i>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="calculadora-full-width" appearance="fill">
+        <mat-label>Segundo Numero</mat-label>
+        <input matInput type="number" id="segundo-numero" formControlName="segundoNumero" placeholder="Segundo número" required>
+        <mat-error *ngIf="segundoNumero.errors?.['required']">
+          <i style="color: red">campo obrigatório</i>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="calculadora-full-width" appearance="fill">
+        <mat-label>Operador</mat-label>
+
+        <mat-select formControlName="operador" required>
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let operador of operadoresView | keyvalue" [value]="operador.key">
+            {{operador.value}}
+          </mat-option>
+        </mat-select>
+
+        <mat-error *ngIf="operador.pending">Validating...</mat-error>
+        <mat-error *ngIf="operador.invalid" class="alert alert-danger operador-errors">
+          <mat-error *ngIf="operador.errors?.['required']">
+            <i style="color: red">campo obrigatório</i>
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+    </section>
+
+    <section>
+      <div class="calculadora-btn-label">Calcular</div>
+      <div class="calculadora-btn-row">
+        <button mat-raised-button color="primary" id="btnCalcula" type="submit" [disabled]="calculadoraForm.invalid">Processar</button>
       </div>
-      <div class="calculadora-full-width">
-        <label for="segundo-numero">Segundo Numero</label>
-        <input type="number" id="segundo-numero" formControlName="segundoNumero" placeholder="Segundo número">
-        <div *ngIf="segundoNumero.errors?.['required']">
-          <i style="color: red">operador é requerido</i>
-        </div>
-      </div>
-      <div class="calculadora-full-width">
-        <label for="operador">Operador</label>
-        <input type="text" id="operador" formControlName="operador" placeholder="operador">
-        <div *ngIf="operador.pending">Validating...</div>
-        <div *ngIf="operador.invalid" class="alert alert-danger operador-errors">
-          <div *ngIf="operador.errors?.['required']">
-            <i style="color: red">operador é requerido</i>
-          </div>
-        </div>
-      </div>
-      <div>
-        <button mat-button color="primary" id="btnCalcula" type="submit" [disabled]="calculadoraForm.invalid">Calcular</button>
-      </div>
-    </div>
+    </section>
   </form>
-  <div>
+
+  <mat-divider></mat-divider>
+
+  <section>
     resultado: {{resultado}}
-  </div>
+  </section>
 </div>
