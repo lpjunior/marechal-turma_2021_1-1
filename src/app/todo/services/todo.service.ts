@@ -14,4 +14,10 @@ export class TodoService {
     localStorage['todos'] = JSON.stringify(todo);
     console.log('[todos]', localStorage['todos']); // exibir o que foi cadastrado
   }
+
+  atualizar(todo: TodoModel): void {
+    let todos = localStorage['todos'];
+    todos.push(todo);
+    localStorage['todos'] = JSON.stringify(todos);
+  }
 }
