@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:dev": "ng serve --live-reload --watch --verbose",
+    "start:dev": "ng build && ng serve --live-reload --watch --verbose",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -21,9 +21,9 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
-    "json-server": "^0.17.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
+    "uuidv4": "^6.2.13",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

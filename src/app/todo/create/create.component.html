@@ -1,1 +1,17 @@
-<p>create works!</p>
+<section>
+  <h1>Cadastrar ToDO</h1>
+  <form [formGroup]="todoForm" (submit)="cadastrar()">
+    <mat-form-field appearance="fill">
+      <mat-label>Nome da tarefa</mat-label>
+      <input matInput placeholder="Tarefa" formControlName="inputNome" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="getNome.status != 'VALID'">Cadastrar</button>
+    <mat-error *ngIf="getNome.errors?.['required']">
+      <span style="color: red">Campo Obrigatório</span>
+    </mat-error>
+  </form>
+</section>
+<section>
+  <p>{{getNome.value}}</p>
+</section>
+

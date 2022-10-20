@@ -4,16 +4,15 @@ import { CreateComponent } from './todo/create/create.component';
 
 const routes: Routes = [
   {
-    path: 'todo/create',
+    path:'todo/create',
     component: CreateComponent
   },
 ];
-
-// criação(create) -> /create
-// edição(edit) -> /edit
-// listagem(list) -> /list
-// visuação(view) -> /{id}
-// compartilhamento(shared) /{id}/shared
+//criacao -> /create
+// edicao -> /edit
+// listagem -> list
+// visualizacao -> /{id}
+//compartilhamento /{id}/shared
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
