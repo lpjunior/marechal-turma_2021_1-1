@@ -8,9 +8,10 @@ import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TodoService } from './services/todo.service';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
-  declarations: [CreateComponent],
+  declarations: [CreateComponent, ListComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
