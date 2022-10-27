@@ -47,13 +47,14 @@ export class TodoService {
 
   // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator
   listar(): TodoModel[] {
-    return JSON.parse(localStorage.getItem('todos') || '{}') ?? [];
+    return JSON.parse(localStorage.getItem('todos')!) as TodoModel[] ?? [];
   }
 
   remover(id:string): void {
     let todos:TodoModel[] = this.listar();
 
     let novoTodos:TodoModel[] = [];
+
     for(let i = 0; i < todos.length; i++) {
       if(todos[i].id !== id) {
         novoTodos.push(todos[i]);

@@ -20,7 +20,7 @@ export class CreateComponent implements OnInit {
         '', // valor inicial do input(elemento)
         [ // validações
           Validators.required, // campo requirido
-          Validators.pattern(/^[a-zA-Z0-9]+$/), // somente letras a-Z e números de 0-9
+          Validators.pattern(/^[a-zA-Z0-9 ]+$/), // somente letras a-Z e números de 0-9
           Validators.minLength(4), // minimo de caracteres
           Validators.maxLength(150) // maximo de caracteres
         ]
@@ -30,6 +30,7 @@ export class CreateComponent implements OnInit {
 
   cadastrar() {
     const todo = this.todoForm.getRawValue() as TodoModel;
+    todo.nome = this.todoForm.get('inputNome')!.value;
     todo.dataCriacao = new Date();
     todo.status = TodoStatus.PENDENTE;
 

@@ -1,0 +1,38 @@
+.title {
+  margin-inline: 5%;
+  font-weight: bolder;
+}
+table {
+  width: 90%;
+  margin-inline: 5%;
+}
+
+.full-width {
+  font-size: 14px;
+  width: 100%;
+}
+
+.btn-table-container {
+  margin-inline: 5%;
+  padding-bottom: 16px;
+}
+
+.btn-table {
+  margin-left: 8px;
+}
+
+td > a {
+  text-decoration: none; /* no underline */
+}
+
+td#edit > a {
+  color: blue;
+}
+
+td#remove > a {
+  color: red;
+}
+
+.mat-icon {
+  vertical-align: middle;
+}
