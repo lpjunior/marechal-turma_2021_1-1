@@ -1,13 +1,8 @@
-<!-- <mat-drawer-container class="menu-container" autosize>
-  <mat-drawer #drawer class="menu-sidenav" mode="side">
-    <p>{{title}}</p>
-    <p *ngIf="showTexto">Aula 05 de Angular</p>
-    <button (click)="showTexto = !showTexto" mat-raised-button>
-      Exibe texto
-    </button>
-  </mat-drawer>
-  <div class="sidenav-content">
-    <button type="button" mat-button (click)="drawer.toggle()">Click</button>
+<section>
+  <div class="btn-menu-container">
+    <button class="btn-menu" (click)="toCreate()" mat-button color="primary">Create</button>
+    <button class="btn-menu" (click)="toList()" mat-button color="primary">List</button>
+    <button class="btn-menu" disabled mat-button color="primary">Shared</button>
   </div>
-</mat-drawer-container> -->
+</section>
 <router-outlet></router-outlet>

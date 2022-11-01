@@ -3,7 +3,7 @@
   font-weight: bolder;
 }
 
-.create-container {
+.edit-container {
   margin-top: 1%;
   margin-inline: 5%;
   padding-bottom: 16px;
@@ -13,8 +13,11 @@
   width: 20rem !important;
 }
 
-.btn-create-container {
+.btn-edit-container {
   margin-top: 2%;
   padding-bottom: 16px;
 }
 
+.edit-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}

@@ -36,16 +36,6 @@
     </td>
   </ng-container>
 
-  <!-- <ng-container matColumnDef="edit">
-    <th mat-header-cell *matHeaderCellDef>Editar Tarefa</th>
-    <td mat-cell id="edit" *matCellDef="let element" (click)="editar(element.id)"><a href=""><mat-icon>edit</mat-icon></a></td>
-  </ng-container>
-
-  <ng-container matColumnDef="remove">
-    <th mat-header-cell *matHeaderCellDef>Apagar Tarefa</th>
-    <td mat-cell id="remove" *matCellDef="let element" (click)="remover(element.id)"><a href=""><mat-icon svgIcon="kickstarter"></mat-icon></a></td>
-  </ng-container> -->
-
   <ng-container matColumnDef="noRecord">
     <td mat-footer-cell *matFooterCellDef>Nenhuma tarefa cadastrada.</td>
   </ng-container>
@@ -57,5 +47,5 @@
   <ng-template #defaultValue> Tarefa não finalizada </ng-template>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> <!-- header -->
-  <tr mat-row (click)="clickedRow = row" *matRowDef="let row; columns: displayedColumns;"></tr> <!-- body -->
+  <tr mat-row [class.table-row-is-clicked]="clickedRow == row" (click)="clickedRow = row" *matRowDef="let row; columns: displayedColumns;"></tr> <!-- body -->
 </table>

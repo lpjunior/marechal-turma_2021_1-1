@@ -11,16 +11,17 @@ import { TodoModel } from '../models/todo.model';
 })
 export class CreateComponent implements OnInit {
   todoForm!: FormGroup;
+  msg!:string;
 
   constructor(private formBuilder: FormBuilder, private todoService: TodoService) {}
 
   ngOnInit(): void {
     this.todoForm = this.formBuilder.group({
-      inputNome: [
+      nome: [
         '', // valor inicial do input(elemento)
         [ // validações
           Validators.required, // campo requirido
-          Validators.pattern(/^[a-zA-Z0-9 ]+$/), // somente letras a-Z e números de 0-9
+          Validators.pattern(/^[A-zÀ-ú0-9 ]+$/), // somente letras a-Z e números de 0-9
           Validators.minLength(4), // minimo de caracteres
           Validators.maxLength(150) // maximo de caracteres
         ]
@@ -30,12 +31,13 @@ export class CreateComponent implements OnInit {
 
   cadastrar() {
     const todo = this.todoForm.getRawValue() as TodoModel;
-    todo.nome = this.todoForm.get('inputNome')!.value;
+    todo.nome = this.todoForm.get('nome')!.value;
     todo.dataCriacao = new Date();
     todo.status = TodoStatus.PENDENTE;
 
     this.todoService.cadastrar(todo);
+    this.msg = "Cadastrado com sucesso."
   }
 
-  get getNome() { return this.todoForm.get('inputNome')!; }
+  get getNome() { return this.todoForm.get('nome')!; }
 }

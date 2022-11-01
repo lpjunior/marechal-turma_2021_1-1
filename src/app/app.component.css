@@ -1,16 +1,9 @@
-.menu-container {
-  width: 500px;
-  height: 300px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+.btn-menu-container {
+  margin-top: 1%;
+  margin-inline: 5%;
+  padding-bottom: 16px;
 }
 
-.menu-sidenav {
-  padding: 20px;
-}
-
-.sidenav-content {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
+.btn-menu {
+  margin-left: 8px;
 }

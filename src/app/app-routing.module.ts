@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateComponent } from './todo/create/create.component';
+import { EditComponent } from './todo/edit/edit.component';
 import { ListComponent } from './todo/list/list.component';
 
 const routes: Routes = [
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path:'todo/list',
     component: ListComponent
+  },
+  {
+    path:'todo/edit/:id',
+    component: EditComponent
   },
 ];
 //criacao -> /create
