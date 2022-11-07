@@ -1,4 +1,4 @@
-# TDD - ToDo Senac
+# ToDo Senac
 
 # Sobre
 
