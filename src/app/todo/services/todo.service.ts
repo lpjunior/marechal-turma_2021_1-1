@@ -1,84 +1,43 @@
 import { Injectable } from '@angular/core';
 import { TodoModel } from '../models/todo.model';
-import * as uuid from 'uuid';
 import { TodoStatus } from '../enums/status.enum';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
+const API_URL = 'http://localhost:8080';
+const HTTP_OPTIONS = {
+  headers: new HttpHeaders(
+    {'Content-Type':'application/json;charset=utf-8'}
+  )
+};
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  // JSON.stringify -> converte o objeto em JSON
-  // JSON.parse -> converte o JSON em objeto
-  cadastrar(todo: TodoModel): void {
-    let todos:TodoModel[] = this.listar();
-    todo.id = uuid.v4();
-    todos.push(todo);
-    console.log(todos);
-    localStorage.setItem('todos', JSON.stringify(todos));
+  cadastrar(todo: TodoModel): Observable<TodoModel> {
+    return this.http.post<TodoModel>(`${API_URL}/app/todo`, todo, HTTP_OPTIONS);
   }
 
-  atualizar(todo: TodoModel): void {
-    let todos:TodoModel[] = this.listar();
-
-    // normal
-    for(let i = 0; i < todos.length; i++) {
-      if(todo.id === todos[i].id) {
-        todos[i] = todo;
-      }
-    }
-
-    localStorage.setItem('todos', JSON.stringify(todos));
+  atualizar(todo: TodoModel): Observable<any> {
+    return this.http.put(`${API_URL}/app/todo`, todo, HTTP_OPTIONS);
   }
 
-  localizarPorId(id:string): TodoModel {
-    const todos:TodoModel[] = this.listar();
-    let todo!:TodoModel;
-    for(let i = 0; i < todos.length; i++) {
-      if(todos[i].id === id) {
-        todo = todos[i];
-        break;
-      }
-    }
-    return todo;
+  localizarPorId(id:string): Observable<TodoModel> {
+    return this.http.get<TodoModel>(`${API_URL}/app/todo/${id}`);
   }
 
-  // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator
-  listar(): TodoModel[] {
-    return JSON.parse(localStorage.getItem('todos')!) as TodoModel[] ?? [];
+  listar(): Observable<TodoModel[]> {
+    return this.http.get<TodoModel[]>(`${API_URL}/app/todos`);
   }
 
-  remover(id:string): void {
-    let todos:TodoModel[] = this.listar();
-
-    let novoTodos:TodoModel[] = [];
-
-    for(let i = 0; i < todos.length; i++) {
-      if(todos[i].id !== id) {
-        novoTodos.push(todos[i]);
-      }
-    }
-
-    todos = novoTodos;
-
-    localStorage.setItem('todos', JSON.stringify(todos));
+  remover(id:string): Observable<any> {
+    return this.http.delete(`${API_URL}/app/todo/${id}`);
   }
 
-  alteraStatus(id:string, status:TodoStatus) {
-    const todos:TodoModel[] = this.listar();
-
-    for(let i = 0; i < todos.length; i++) {
-      if(todos[i].id === id) {
-        todos[i].status = status;
-        if(status === TodoStatus.CONCLUIDO) {
-          todos[i].dataFinalizacao = new Date();
-        }
-        break;
-      }
-    }
-
-    localStorage.setItem('todos', JSON.stringify(todos));
+  alteraStatus(id:string, status:TodoStatus): Observable<any> {
+    return this.http.patch(`${API_URL}/app/todo/${id}`, status, HTTP_OPTIONS);
   }
 }

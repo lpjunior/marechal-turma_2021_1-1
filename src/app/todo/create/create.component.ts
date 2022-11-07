@@ -32,11 +32,18 @@ export class CreateComponent implements OnInit {
   cadastrar() {
     const todo = this.todoForm.getRawValue() as TodoModel;
     todo.nome = this.todoForm.get('nome')!.value;
-    todo.dataCriacao = new Date();
     todo.status = TodoStatus.PENDENTE;
-
-    this.todoService.cadastrar(todo);
-    this.msg = "Cadastrado com sucesso."
+    this.todoService.cadastrar(todo).subscribe({
+      next: () => {
+        this.todoForm.reset();
+        this.msg = "Cadastrado com sucesso.";
+      },
+      error: (err) => {
+        console.error(err);
+        this.todoForm.reset();
+        this.msg = "Falha ao cadastrar.";
+      }
+   });
   }
 
   get getNome() { return this.todoForm.get('nome')!; }
