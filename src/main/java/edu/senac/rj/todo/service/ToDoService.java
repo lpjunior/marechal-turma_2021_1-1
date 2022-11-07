@@ -1,9 +1,11 @@
 package edu.senac.rj.todo.service;
 
 import edu.senac.rj.todo.model.ToDo;
+import edu.senac.rj.todo.model.enums.TodoStatus;
 import edu.senac.rj.todo.repository.ToDoRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,7 +26,10 @@ public class ToDoService {
     }
 
     public ToDo save(ToDo toDo) {
-        return toDoRepository.save(toDo); // implementa o upsert
+        if(toDo.getStatus() == TodoStatus.CONCLUIDO)
+            toDo.setDataFinalizacao(LocalDateTime.now());
+
+        return toDoRepository.save(toDo);
     }
 
     public List<ToDo> saveAll(List<ToDo> toDoList) {
