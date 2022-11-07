@@ -65,7 +65,6 @@ export class EditComponent implements OnInit {
   }
 
   loadForm(todo: TodoModel): void {
-    console.log('todo: ', todo)
     this.todoForm.patchValue({
       nome: todo.nome,
       status: '' + todo.status,

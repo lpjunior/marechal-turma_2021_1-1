@@ -28,7 +28,6 @@ export class ListComponent implements OnInit {
       next: (todoList: TodoModel[]) => {
         this.todos = todoList;
         this.dataSource = new MatTableDataSource(this.todos);
-        console.log(this.dataSource)
       },
       error: (err) => {
         console.error(err);
