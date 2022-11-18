@@ -1,0 +1,7 @@
+{
+  "name": "cadastro-cliente",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
