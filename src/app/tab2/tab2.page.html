@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Clientes
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,36 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Lista de Clientes</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-content>
+    <ion-grid class="ion-grid-padding">
+      <ion-row>
+        <ion-col sizeXs="2">#</ion-col>
+        <ion-col sizeXs="7">Nome</ion-col>
+        <ion-col class="hidden-xs-col">Email</ion-col>
+        <ion-col class="hidden-xs-col">Telefone</ion-col>
+        <ion-col class="hidden-xs-col">Logradouro</ion-col>
+        <ion-col class="hidden-xs-col">Número</ion-col>
+        <ion-col class="hidden-xs-col">Bairro</ion-col>
+        <ion-col class="hidden-xs-col">Cidade</ion-col>
+        <ion-col class="hidden-xs-col">Cep</ion-col>
+        <ion-col sizeXs="3" class="show-xs-col hidden-md-col hidden-xl-col hidden-lg-col">Detalhes</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let cliente of clientes">
+        <ion-col sizeXs="2">{{ cliente.id }}</ion-col>
+        <ion-col sizeXs="7">{{ cliente.nome }}</ion-col>
+        <ion-col class="hidden-xs-col">{{ cliente.email }}</ion-col>
+        <ion-col class="hidden-xs-col">{{ cliente.telefone }}</ion-col>
+        <ion-col class="hidden-xs-col">{{ cliente.logradouro }}</ion-col>
+        <ion-col class="hidden-xs-col">{{ cliente.numero }}</ion-col>
+        <ion-col class="hidden-xs-col">{{ cliente.bairro }}</ion-col>
+        <ion-col class="hidden-xs-col">{{ cliente.cidade }}</ion-col>
+        <ion-col class="hidden-xs-col">{{ cliente.cep }}</ion-col>
+        <ion-col sizeXs="3" class="show-xs-col hidden-md-col hidden-xl-col hidden-lg-col"><ion-button class="btn-modal" fill="clear" (click)="openModal()">Show</ion-button></ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="ion-modal-content"></div>
+  </ion-content>
 </ion-content>

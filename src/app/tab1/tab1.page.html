@@ -1,17 +1,65 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title> Cadastro </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Cadastro de Cliente</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-content>
+    <form [formGroup]="clienteForm" fullscreen (submit)="addCliente()">
+      <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <ion-item-group>
+          <ion-item-divider>
+            <ion-label>Dados Pessoais</ion-label>
+          </ion-item-divider>
+          <ion-item>
+            <ion-label position="stacked">Nome</ion-label>
+            <ion-input formControlName="nome" type="text" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Email</ion-label>
+            <ion-input formControlName="email" type="email" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Telefone</ion-label>
+            <ion-input formControlName="telefone" type="tel" required></ion-input>
+          </ion-item>
+        </ion-item-group>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+        <ion-item-group>
+          <ion-item-divider>
+            <ion-label>Dados Endereço</ion-label>
+          </ion-item-divider>
+          <ion-item>
+            <ion-label position="stacked">Logradouro</ion-label>
+            <ion-input formControlName="logradouro" type="text" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Número</ion-label>
+            <ion-input formControlName="numero" type="number" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Bairro</ion-label>
+            <ion-input formControlName="bairro" type="text" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Cidade</ion-label>
+            <ion-input formControlName="cidade" type="text" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Cep</ion-label>
+            <ion-input formControlName="cep" type="text" required></ion-input>
+          </ion-item>
+        </ion-item-group>
+      </ion-list>
+      <div class="ion-padding">
+        <ion-button [disabled]="clienteForm.invalid" expand="block" type="submit" class="ion-no-margin">Registrar</ion-button>
+      </div>
+    </form>
+  </ion-content>
 </ion-content>

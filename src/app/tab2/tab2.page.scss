@@ -1,0 +1,77 @@
+ion-grid {
+  --ion-grid-column-padding: 10px;
+  border-collapse: collapse;
+  border-style: hidden;
+}
+
+ion-row:first-child {
+  background-color: #e91e63;
+  font-weight: bold;
+}
+
+ion-col {
+  border: 1px solid white;
+  border-bottom: 0;
+  border-right: 0;
+}
+
+ion-col:last-child {
+  border-right: 1px solid white;
+}
+
+ion-row:last-child {
+  border-bottom: 1px solid white;
+}
+
+.btn-modal {
+  text-decoration: underline;
+}
+.btn-modal:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 575px) {
+  .hidden-xs-col {
+    display: none;
+  }
+  .show-xs-col {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .hidden-sm-col {
+    display: none;
+  }
+  .show-sm-col {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .hidden-md-col {
+    display: none;
+  }
+  .show-md-col {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .hidden-lg-col {
+    display: none;
+  }
+  .show-lg-col {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 1200px)  {
+  .hidden-xl-col {
+    display: none;
+  }
+  .show-xl-col {
+    display: block;
+  }
+}
+
