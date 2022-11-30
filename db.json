@@ -1,17 +1,6 @@
 {
   "cliente": [
     {
-      "id": 1,
-      "nome": "User example",
-      "email": "user.example@test.com",
-      "telefone": "1-123-44-789",
-      "logradouro": "Rua XYZ",
-      "numero": 123,
-      "bairro": "centro",
-      "cidade": "Rio de Janeiro",
-      "cep": "20000000"
-    },
-    {
       "nome": "Luis",
       "email": "luis@rj.senac.edu",
       "telefone": "(21) 12345-6789",
@@ -19,8 +8,8 @@
       "numero": 123,
       "bairro": "Centro",
       "cidade": "Rio de Janeiro",
-      "cep": "211234567",
-      "id": 2
+      "cep": "21123123",
+      "id": 1
     }
   ]
 }

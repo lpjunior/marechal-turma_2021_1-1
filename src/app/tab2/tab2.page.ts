@@ -28,10 +28,31 @@ export class Tab2Page {
     });
   }
 
-  async openModal() {
+  async openModal(id:number) {
+
+    // busca(find) em lambda
+    const cliente = this.clientes.find(cliente => cliente.id === id);
+    /*
+      filter -> utilizado para quando se quer trazer mais de um resultado.
+      é possível utilizar o filter para executar uma consulta "singular", selecionando o índice zero([0])
+      benchmarks find x filter:
+    */
+
     const modal = await this.modalCtrl.create({
       component: ModalClientDetailsComponent,
+      componentProps: {
+        'cliente': cliente
+      }
     });
-    modal.present();
+
+    modal.onWillDismiss().then(
+      event => {
+        if(event.role === 'cancel') {
+          this.listaClientes();
+        }
+      }
+    );
+
+    return await modal.present();
   }
 }

@@ -36,7 +36,7 @@
         <ion-col class="hidden-xs-col">{{ cliente.bairro }}</ion-col>
         <ion-col class="hidden-xs-col">{{ cliente.cidade }}</ion-col>
         <ion-col class="hidden-xs-col">{{ cliente.cep }}</ion-col>
-        <ion-col sizeXs="3" class="show-xs-col hidden-md-col hidden-xl-col hidden-lg-col"><ion-button class="btn-modal" fill="clear" (click)="openModal()">Show</ion-button></ion-col>
+        <ion-col sizeXs="3" class="show-xs-col hidden-md-col hidden-xl-col hidden-lg-col"><ion-button class="btn-modal" fill="clear" (click)="openModal(cliente.id)">Show</ion-button></ion-col>
       </ion-row>
     </ion-grid>
     <div class="ion-modal-content"></div>
