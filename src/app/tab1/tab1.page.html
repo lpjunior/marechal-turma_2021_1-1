@@ -11,7 +11,7 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <form [formGroup]="clienteForm" fullscreen (submit)="addCliente()">
+    <form [formGroup]="clienteForm" fullscreen (submit)="editable ? addCliente() : addCliente()">
       <ion-list lines="full" class="ion-no-margin ion-no-padding">
         <ion-item-group>
           <ion-item-divider>

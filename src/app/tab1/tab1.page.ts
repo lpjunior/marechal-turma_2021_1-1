@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cliente } from '../model/cliente.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteService } from '../services/cliente.service';
 
 @Component({
@@ -12,8 +12,14 @@ import { ClienteService } from '../services/cliente.service';
 export class Tab1Page implements OnInit {
 
   clienteForm!: FormGroup;
+  cliente!:Cliente;
+  editable:boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private clienteService: ClienteService, private router: Router) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private clienteService: ClienteService,
+    private router: Router,
+    private route: ActivatedRoute) {}
 
   ngOnInit(): void {
       this.clienteForm = this.formBuilder.group({
@@ -25,6 +31,21 @@ export class Tab1Page implements OnInit {
         bairro: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
         cidade: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
         cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(10)]],
+      });
+
+      this.route.paramMap.subscribe(params => {
+        const clienteId = +params.get('id')!;
+
+        if(clienteId) {
+          this.clienteService.findCliente(clienteId).subscribe({
+            next: (clienteDB: Cliente) => {
+              this.cliente = clienteDB;
+              this.editable = true;
+              this.loadForm();
+            },
+            error: (err) => console.log(err)
+          });
+        }
       });
   }
 
@@ -40,5 +61,22 @@ export class Tab1Page implements OnInit {
       },
       error: (error:any) => { console.log(error) }
     });
+  }
+
+  loadForm() {
+    this.clienteForm.patchValue({
+      nome: this.cliente.nome,
+      email: this.cliente.email,
+      telefone: this.cliente.telefone,
+      logradouro: this.cliente.logradouro,
+      numero: this.cliente.numero,
+      bairro: this.cliente.bairro,
+      cidade: this.cliente.cidade,
+      cep: this.cliente.cep
+    });
+  }
+
+  editar() {
+    const clienteId = this.cliente.id;
   }
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Cliente } from '../model/cliente.model';
 import { ClienteService } from '../services/cliente.service';
@@ -13,7 +14,8 @@ export class ModalClientDetailsComponent implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
-    private service: ClienteService
+    private service: ClienteService,
+    private router: Router
   ) {}
 
   cancel() {
@@ -23,7 +25,8 @@ export class ModalClientDetailsComponent implements OnInit {
   ngOnInit() {}
 
   edit(id: number) {
-    // redirecionar para a página de cadastro informando o ID do nosso cliente
+    this.router.navigate(['/tabs/editar', id]);
+    this.modalCtrl.dismiss(null, 'cancel');
   }
 
   delete(id: number) {
