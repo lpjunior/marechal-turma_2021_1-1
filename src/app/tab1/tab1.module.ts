@@ -7,6 +7,7 @@ import { Tab1Page } from './tab1.page';
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { ClienteService } from '../services/cliente.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CorreiosService } from '../services/correios.service';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   declarations: [Tab1Page],
-  providers: [ClienteService]
+  providers: [ClienteService, CorreiosService]
 })
 export class Tab1PageModule {}

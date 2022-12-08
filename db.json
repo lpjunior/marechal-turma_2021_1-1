@@ -3,12 +3,12 @@
     {
       "nome": "Luis",
       "email": "luis@rj.senac.edu",
-      "telefone": "(21) 12345-6789",
-      "logradouro": "Rua 1",
+      "telefone": "(21) 98765-4321",
+      "logradouro": "Comunidade Centro Comunitário Brasil Cabo Verde",
       "numero": 123,
-      "bairro": "Centro",
+      "bairro": "Benfica",
       "cidade": "Rio de Janeiro",
-      "cep": "21123123",
+      "cep": "20973-013",
       "id": 1
     }
   ]

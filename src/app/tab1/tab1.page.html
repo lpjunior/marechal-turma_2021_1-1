@@ -1,17 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Cadastro </ion-title>
+    <ion-title> {{ editable ? 'Edição' : 'Cadastro'}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Cadastro de Cliente</ion-title>
+      <ion-title size="large">{{ editable ? 'Edição do Cliente' : 'Cadastro de Cliente'}}</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <form [formGroup]="clienteForm" fullscreen (submit)="editable ? addCliente() : addCliente()">
+    <form [formGroup]="clienteForm" fullscreen (submit)="editable ? editCliente() : addCliente()">
       <ion-list lines="full" class="ion-no-margin ion-no-padding">
         <ion-item-group>
           <ion-item-divider>
@@ -36,8 +36,12 @@
             <ion-label>Dados Endereço</ion-label>
           </ion-item-divider>
           <ion-item>
+            <ion-label position="stacked">Cep</ion-label>
+            <ion-input (change)="loadEndereco()" formControlName="cep" type="text" required></ion-input>
+          </ion-item>
+          <ion-item>
             <ion-label position="stacked">Logradouro</ion-label>
-            <ion-input formControlName="logradouro" type="text" required></ion-input>
+            <ion-input formControlName="logradouro" type="text" required readonly></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">Número</ion-label>
@@ -45,20 +49,16 @@
           </ion-item>
           <ion-item>
             <ion-label position="stacked">Bairro</ion-label>
-            <ion-input formControlName="bairro" type="text" required></ion-input>
+            <ion-input formControlName="bairro" type="text" required readonly></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">Cidade</ion-label>
-            <ion-input formControlName="cidade" type="text" required></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="stacked">Cep</ion-label>
-            <ion-input formControlName="cep" type="text" required></ion-input>
+            <ion-input formControlName="cidade" type="text" required readonly></ion-input>
           </ion-item>
         </ion-item-group>
       </ion-list>
       <div class="ion-padding">
-        <ion-button [disabled]="clienteForm.invalid" expand="block" type="submit" class="ion-no-margin">Registrar</ion-button>
+        <ion-button [disabled]="clienteForm.invalid" expand="block" type="submit" class="ion-no-margin">{{ editable ? 'Editar' : 'Registrar'}}</ion-button>
       </div>
     </form>
   </ion-content>
