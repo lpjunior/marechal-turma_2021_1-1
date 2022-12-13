@@ -34,7 +34,11 @@ public class ToDoController {
     @GetMapping(value = "/todo/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Returns a registered todo", responses = {@ApiResponse(description = "Success when executing", responseCode = "200", content = @Content)})
     ResponseEntity<ToDo> getToDo(@PathVariable UUID id) {
-        return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
+        var todo = service.findById(id);
+        if(todo != null)
+            return new ResponseEntity<>(todo, HttpStatus.OK);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping(value = "/todo", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
