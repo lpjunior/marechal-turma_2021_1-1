@@ -1,16 +1,53 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title>Contacts</ion-title>
+    <ion-buttons collapse="true" slot="end">
+      <ion-button color="primary" (click)="newContact()">
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Contacts</ion-title>
+      <ion-buttons collapse="true" slot="end">
+        <ion-button color="primary" (click)="newContact()">
+          <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
+  <ion-accordion-group>
+    <ion-accordion *ngFor="let contact of contacts | async">
+      <ion-item slot="header" color="light">
+        <ion-label>{{ contact.name }} {{ contact.lastName }} </ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item>
+            <ion-avatar slot="start">
+              <img
+                alt="Silhouette of a person's head"
+                src="https://ionicframework.com/docs/img/demos/avatar.svg"
+              />
+            </ion-avatar>
+            <ion-label>{{ contact.name }}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>{{ contact.phone }}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>{{ contact.email }}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>{{ contact.category }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
 </ion-content>

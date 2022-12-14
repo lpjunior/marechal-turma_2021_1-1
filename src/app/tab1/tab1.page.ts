@@ -28,8 +28,7 @@ export class Tab1Page implements OnInit {
   createContact(values: any) {
     // pegar todos os dados do formulário e transformar em um novo contato
     let newContact:Contact = { ...values };
-    //this.firebaseService.save(newContact);
-    console.log(newContact);
+    this.firebaseService.save(newContact);
     this.contactFormGroupDirective.reset();
   }
 }

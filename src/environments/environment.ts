@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyC4lx3bgR8GSmV9gmWnA_sr-cO7jDE7pqg',
-    authDomain: 'contact-manager-be0d4.firebaseapp.com',
-    projectId: 'contact-manager-be0d4',
-    storageBucket: 'contact-manager-be0d4.appspot.com',
-    messagingSenderId: '1026687546593',
-    appId: '1:1026687546593:web:26dff1037e434c8cd933a0',
+    apiKey: 'AIzaSyCfTcpSCGqbx2V9q3kAz7jZwVbvHH9KH34',
+    authDomain: 'contact-manager-479af.firebaseapp.com',
+    projectId: 'contact-manager-479af',
+    storageBucket: 'contact-manager-479af.appspot.com',
+    messagingSenderId: '186696498525',
+    appId: '1:186696498525:web:369970af678ce64dc23cb4',
   },
 };
 
