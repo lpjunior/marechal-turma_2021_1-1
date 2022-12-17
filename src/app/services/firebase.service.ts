@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { collection, collectionData, deleteDoc, doc, docSnapshots, Firestore, setDoc } from '@angular/fire/firestore';
+import { collection, collectionData, deleteDoc, doc, docData, docSnapshots, Firestore, setDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { Contact } from '../models/contact.model';
 
 @Injectable({
@@ -35,6 +35,16 @@ export class FirebaseService {
         })
       );
   }
+
+  findByName(name: string): Observable<Contact[]> {
+      const contactList = this.list();
+        return contactList.pipe(
+          map(contacts => contacts.filter(contact => {
+            const fullName = contact.name.concat(" ", contact.lastName);
+            return fullName.toLowerCase().match(name.toLowerCase());
+          }))
+          )
+    }
 
   update(contact: Contact): Promise<void> {
     const document = doc(this.firestore, 'contacts', contact?.id);
