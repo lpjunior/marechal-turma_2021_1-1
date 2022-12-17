@@ -29,7 +29,7 @@ export class Tab3Page implements OnInit {
       .subscribe({
         next: (result) => {
 
-          if(result.length == 0) {
+          if(!result) {
             this.presentToast(`Contact not found: ${contact.name}`);
           }
 
