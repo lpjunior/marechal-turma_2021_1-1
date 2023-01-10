@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
+        path: 'details/:id',
+        loadChildren: () => import('../tab1/contact-details/contact-details.module').then( m => m.ContactDetailsPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/register',
         pathMatch: 'full'

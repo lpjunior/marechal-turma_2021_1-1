@@ -35,7 +35,7 @@
                 src="https://ionicframework.com/docs/img/demos/avatar.svg"
               />
             </ion-avatar>
-            <ion-label>{{ contact.name }}</ion-label>
+            <ion-label (click)="editContact(contact.id)">{{ contact.name }}</ion-label>
           </ion-item>
           <ion-item>
             <ion-label>{{ contact.phone }}</ion-label>
