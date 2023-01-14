@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Contact } from '../models/contact.model';
-import { FirebaseService } from '../services/firebase.service';
+import { FirebaseFirestoreService } from '../services/firebase.firestore.service';
 
 @Component({
   selector: 'app-tab3',
@@ -16,7 +17,7 @@ export class Tab3Page implements OnInit {
   searchFG!: FormGroup;
   @ViewChild('searchFGD') searchFGD!: FormGroupDirective;
 
-  constructor(private toastController: ToastController, private firebaseService: FirebaseService) {}
+  constructor(private toastController: ToastController, private firebaseService: FirebaseFirestoreService, private router: Router) {}
 
   ngOnInit(): void {
     this.searchFG = new FormGroup({
@@ -52,5 +53,9 @@ export class Tab3Page implements OnInit {
     });
 
     await toast.present();
+  }
+
+  editContact(id:string) {
+    this.router.navigateByUrl(`/tabs/details/${id}`);
   }
 }

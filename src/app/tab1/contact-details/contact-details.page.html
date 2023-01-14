@@ -37,12 +37,13 @@
         </ion-select>
       </ion-item>
     <ion-item lines="none">
-      <ion-buttons>
+      <ion-buttons slot="start">
         <ion-button type="submit" color="primary" [disabled]="!contactFormGroup.valid">Save</ion-button>
-        <ion-button type="button" color="danger" (click)="deleteContact()">Delete Contact</ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button type="button" color="danger" (click)="deleteContact()">Delete</ion-button>
       </ion-buttons>
     </ion-item>
     </ion-list>
-
   </form>
 </ion-content>

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
 
 import { Tab3PageRoutingModule } from './tab3-routing.module';
-import { FirebaseService } from '../services/firebase.service';
+import { FirebaseFirestoreService } from '../services/firebase.firestore.service';
 
 @NgModule({
   imports: [
@@ -16,6 +16,6 @@ import { FirebaseService } from '../services/firebase.service';
     Tab3PageRoutingModule
   ],
   declarations: [Tab3Page],
-  providers: [FirebaseService]
+  providers: [FirebaseFirestoreService]
 })
 export class Tab3PageModule {}

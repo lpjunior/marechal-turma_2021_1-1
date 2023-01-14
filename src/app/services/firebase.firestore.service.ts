@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { collection, collectionData, deleteDoc, doc, docData, docSnapshots, Firestore, setDoc } from '@angular/fire/firestore';
+import { collection, collectionData, deleteDoc, doc, docSnapshots, Firestore, setDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Contact } from '../models/contact.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseService {
+export class FirebaseFirestoreService {
 
   constructor(private firestore: Firestore) { }
 
