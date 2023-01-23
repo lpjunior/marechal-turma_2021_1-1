@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { collection, collectionData, deleteDoc, doc, docSnapshots, Firestore, setDoc } from '@angular/fire/firestore';
+import { collection, collectionData, deleteDoc, doc, docSnapshots, Firestore, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Contact } from '../models/contact.model';
@@ -49,7 +49,7 @@ export class FirebaseFirestoreService {
   update(contact: Contact): Promise<void> {
     const document = doc(this.firestore, 'contacts', contact?.id);
     const { id, ...data } = contact;
-    return setDoc(document, data);
+    return updateDoc(document, data);
   }
 
   delete(id: string): Promise<void> {

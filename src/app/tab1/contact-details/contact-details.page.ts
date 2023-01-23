@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-  FormGroup,
-  FormGroupDirective,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, FormGroupDirective, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { Contact } from 'src/app/models/contact.model';
+import { FirebaseFirestorageService } from 'src/app/services/firebase-firestorage.service';
 import { FirebaseFirestoreService } from 'src/app/services/firebase.firestore.service';
 
 @Component({
@@ -15,15 +13,18 @@ import { FirebaseFirestoreService } from 'src/app/services/firebase.firestore.se
   styleUrls: ['./contact-details.page.scss'],
 })
 export class ContactDetailsPage implements OnInit {
-  private contact!: Contact;
+  contact!: Contact;
   contactFormGroup!: FormGroup;
   @ViewChild('contactFormGroupDirective')
   formGroupDirective!: FormGroupDirective;
 
   constructor(
     private firebaseService: FirebaseFirestoreService,
+    private firebaseFirestorageService: FirebaseFirestorageService,
     private activedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private loadingController: LoadingController,
+    private alertController: AlertController
   ) {}
 
   ngOnInit(): void {
@@ -72,5 +73,40 @@ export class ContactDetailsPage implements OnInit {
       .delete(this.contact.id)
       .then(() => this.router.navigateByUrl('/tabs/list'))
       .catch((err) => console.error(err));
+  }
+
+  async uploadImage() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Photos
+    });
+
+
+    if(image) {
+      const loading = await this.loadingController.create();
+      await loading.present();
+
+      const result = await this.firebaseFirestorageService.upload(image, this.contact.id);
+
+      loading.dismiss();
+
+      if(result) {
+        this.message('Success', 'Success on save image');
+      } else {
+        this.message('Fail', 'Ops! There was a problem');
+      }
+    }
+  }
+
+  async message(header:string, message:string) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['Ok']
+    });
+
+    await alert.present();
   }
 }

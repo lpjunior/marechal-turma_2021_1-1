@@ -6,12 +6,8 @@
 
 <ion-content [fullscreen]="true">
   <ion-thumbnail class="user-image">
-    <img src="../../assets/avatar.png">
+    <img [src]="avatar">
   </ion-thumbnail>
-
-  <ion-row class="photo-wrapper">
-    <ion-button fill="clear">Add Photo</ion-button>
-  </ion-row>
 
   <form [formGroup]="contactFormGroup" #contactFormGroupDirective="ngForm" (ngSubmit)="createContact(contactFormGroup.value)">
     <ion-list>

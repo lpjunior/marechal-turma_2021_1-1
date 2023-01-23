@@ -1,28 +1,37 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/compat/firestore';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { doc, docData, DocumentData, Firestore, updateDoc } from '@angular/fire/firestore';
+import { getDownloadURL, ref, Storage, uploadString } from '@angular/fire/storage';
+import { Photo } from '@capacitor/camera';
 import { Observable } from 'rxjs';
-import { Avatar } from '../models/avatar.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseFirestorageService {
-  private filesCollection!: AngularFirestoreCollection<Avatar>;
-  private files!: Observable<Avatar[]>;
 
-  constructor(
-    private afs: AngularFirestore,
-    private afStorage: AngularFireStorage
-  ) {
-    this.filesCollection = this.getCollection('contactsCollection');
-    this.files = this.filesCollection.valueChanges();
+  constructor(private firestore: Firestore, private storage: Storage) {}
+
+  getContactProfile(uuid: string) : Observable<DocumentData> {
+    const contactDocRef = doc(this.firestore, `contacts/${uuid}`);
+    return docData(contactDocRef);
   }
 
-  getCollection(collectionId: string): AngularFirestoreCollection<Avatar> {
-    return this.afs.collection(collectionId);
+  async upload(photo:Photo, uuid:string): Promise<boolean> {
+    const path = `uploads/contacts/${uuid}/${new Date().getTime()}.png`;
+
+    const storageRef = ref(this.storage, path);
+
+    try {
+      await uploadString(storageRef, photo.base64String!, 'base64');
+      const imageUrl = await getDownloadURL(storageRef);
+
+      const contactDocRef = doc(this.firestore, 'contacts', uuid);
+
+      await updateDoc(contactDocRef, { imageUrl });
+
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 }

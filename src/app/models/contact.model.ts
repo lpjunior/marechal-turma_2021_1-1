@@ -6,5 +6,6 @@ export class Contact {
   lastName!: string;
   phone!: string;
   email!: string;
+  imageUrl!: string;
   category!: ContactCategory;
 }

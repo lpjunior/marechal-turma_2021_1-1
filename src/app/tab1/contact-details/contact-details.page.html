@@ -6,11 +6,11 @@
 
 <ion-content [fullscreen]="true">
   <ion-thumbnail class="user-image">
-    <img src="../../assets/avatar.png">
+    <img [src]="contact.imageUrl" *ngIf="contactFormGroup">
   </ion-thumbnail>
 
   <ion-row class="photo-wrapper">
-    <ion-button fill="clear">Update Photo</ion-button>
+    <ion-button fill="clear"(click)="uploadImage()">Update Photo</ion-button>
   </ion-row>
 
   <form [formGroup]="contactFormGroup" *ngIf="contactFormGroup" #contactFormGroupDirective="ngForm" (ngSubmit)="editContact(contactFormGroup.value)">
