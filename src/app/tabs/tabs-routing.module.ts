@@ -25,14 +25,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/register',
+        redirectTo: '/tabs/register',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/register',
+    redirectTo: '/tabs/register',
     pathMatch: 'full'
   }
 ];

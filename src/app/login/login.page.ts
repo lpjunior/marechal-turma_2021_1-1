@@ -30,7 +30,7 @@ export class LoginPage implements OnInit {
     const user = await this.firebaseAuthenticationService.register(this.credentialFormGroup.value as CredentialModel);
 
     if(user) {
-      this.router.navigateByUrl('/home', { replaceUrl: true });
+      this.router.navigateByUrl('/tabs', { replaceUrl: true });
     }
   }
 }
