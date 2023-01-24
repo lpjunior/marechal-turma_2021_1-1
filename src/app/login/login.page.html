@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="credentialFormGroup">
+    <ion-item>
+      <ion-input type="email" placeholder="E-mail" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+    </ion-item>
+    <ion-button expand="full" color="secondary">Login</ion-button>
+    <ion-button expand="full" color="secondary" (click)="register()">Register</ion-button>
+  </form>
+</ion-content>
