@@ -1,11 +1,14 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import {
   FormControl,
   FormGroup,
   FormGroupDirective,
   Validators,
 } from '@angular/forms';
-import { Contact } from '../models/contact.model';
+import { Router } from '@angular/router';
+import { ContactModel } from '../models/contact.model';
+import { FirebaseAuthenticationService } from '../services/firebase.authentication.service';
 import { FirebaseFirestoreService } from '../services/firebase.firestore.service';
 
 @Component({
@@ -16,14 +19,21 @@ import { FirebaseFirestoreService } from '../services/firebase.firestore.service
 export class Tab1Page implements OnInit {
 
   avatar:string = "../../assets/avatar.png";
+  displayName:string;
 
   contactFormGroup!: FormGroup;
   @ViewChild('contactFormGroupDirective')
   contactFormGroupDirective!: FormGroupDirective;
 
-  constructor(private firebaseService: FirebaseFirestoreService) {}
+  constructor(
+    private firebaseService: FirebaseFirestoreService,
+    private firebaseAuthenticationService: FirebaseAuthenticationService,
+    private router: Router,
+    private auth:Auth) {
+      this.displayName = this.auth.currentUser!.displayName!;
+    }
 
-  ngOnInit(): void {
+    ngOnInit(): void {
     this.contactFormGroup = new FormGroup({
       name: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
@@ -36,10 +46,10 @@ export class Tab1Page implements OnInit {
   }
 
   createContact(values: any) {
-    let newContact: Contact = { ...values };
+    let newContact: ContactModel = { ...values };
     newContact.imageUrl = this.avatar;
 
-    this.firebaseService.save(newContact);
+    this.firebaseService.saveContact(newContact);
     this.contactFormGroupDirective.reset();
   }
 
@@ -48,5 +58,14 @@ export class Tab1Page implements OnInit {
     if(email?.valid) {
       this.avatar = `https://robohash.org/${email.value}?set=set3&gravatar=yes`;
     }
+  }
+
+  async signOut() {
+    await this.firebaseAuthenticationService.signOut();
+    this.router.navigateByUrl('/', { replaceUrl: true });
+  }
+
+  async perfil() {
+    this.router.navigateByUrl('/perfil', { replaceUrl: true });
   }
 }

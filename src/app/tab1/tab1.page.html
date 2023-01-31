@@ -1,5 +1,16 @@
 <ion-header [translucent]="true" class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="end">
+      <ion-button (click)="signOut()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-button (click)="perfil()">
+        <ion-icon slot="start" name="person"></ion-icon>
+        {{ displayName }}
+      </ion-button>
+    </ion-buttons>
     <ion-title>New Contact</ion-title>
   </ion-toolbar>
 </ion-header>

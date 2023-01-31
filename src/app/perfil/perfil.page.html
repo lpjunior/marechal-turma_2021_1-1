@@ -1,0 +1,46 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="danger">
+    <ion-buttons slot="end">
+      <ion-button (click)="signOut()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-button (click)="perfil()">
+        <ion-icon slot="start" name="person"></ion-icon>
+        {{ displayName }}
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-thumbnail class="user-image" (click)="changeImage()">
+    <img *ngIf="imageUrl else placeholder_profile;" [src]="imageUrl">
+  </ion-thumbnail>
+
+  <ng-template #placeholder_profile>
+    <div>
+      <p>Upload Profile</p>
+    </div>
+  </ng-template>
+
+
+  <form [formGroup]="perfilFormGroup" *ngIf="perfilFormGroup" #perfilFormGroupDirective="ngForm" (ngSubmit)="update()">
+    <ion-list>
+      <ion-item>
+        <ion-input placeholder="Name" inputMode="text" clearInput="true" formControlName="name" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Email" inputMode="email" clearInput="false" formControlName="email" [disabled]="true" [readonly]="true"></ion-input>
+      </ion-item>
+    <ion-item lines="none">
+      <ion-buttons>
+        <ion-button type="submit" color="primary" [disabled]="!perfilFormGroup.valid">Save</ion-button>
+      </ion-buttons>
+    </ion-item>
+    </ion-list>
+
+  </form>
+</ion-content>

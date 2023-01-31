@@ -1,6 +1,6 @@
 import { ContactCategory } from './contact.category.enum';
 
-export class Contact {
+export class ContactModel {
   id!: string;
   name!: string;
   lastName!: string;

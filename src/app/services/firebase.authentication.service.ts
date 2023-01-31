@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, UserCredential } from '@angular/fire/auth';
-import { Firestore } from '@angular/fire/firestore';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, UserCredential } from '@angular/fire/auth';
 import { CredentialModel } from '../models/credential.model';
 
 @Injectable({
@@ -24,7 +23,22 @@ export class FirebaseAuthenticationService {
     });
   }
 
-  //async signin(); // login
-  //async signout(); // logout
+  async signIn(credential:CredentialModel): Promise<UserCredential | null> {
+    return signInWithEmailAndPassword(this.auth, credential.email, credential.password)
+    .then((user:UserCredential) => user)
+    .catch(error => {
+      console.error(error);
+      return null;
+    });
+  }
+
+  async updateProfile(displayName:string): Promise<void> {
+    return updateProfile(this.auth.currentUser!, { displayName: displayName });
+  }
+
+  async signOut(): Promise<void> {
+    return signOut(this.auth);
+  }
+
   //async recovery(); // recupera senha
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { CredentialModel } from '../models/credential.model';
 import { FirebaseAuthenticationService } from '../services/firebase.authentication.service';
 
@@ -16,7 +17,8 @@ export class LoginPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private firebaseAuthenticationService: FirebaseAuthenticationService,
-    private router: Router
+    private router: Router,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {
@@ -31,6 +33,28 @@ export class LoginPage implements OnInit {
 
     if(user) {
       this.router.navigateByUrl('/tabs', { replaceUrl: true });
+    } else {
+      this.showAlert('Register failed', 'Please try again!');
     }
+  }
+
+  async signIn(): Promise<void> {
+    const user = await this.firebaseAuthenticationService.signIn(this.credentialFormGroup.getRawValue() as CredentialModel)
+
+    if(user) {
+      this.router.navigateByUrl('/tabs', { replaceUrl: true });
+    } else {
+      this.showAlert('SignIn failed', 'Please try again!');
+    }
+  }
+
+  async showAlert(header: string, message: string): Promise<void> {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['Ok']
+    });
+
+    await alert.present();
   }
 }

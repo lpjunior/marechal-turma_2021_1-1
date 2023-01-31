@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { Contact } from '../models/contact.model';
+import { ContactModel } from '../models/contact.model';
 import { FirebaseFirestoreService } from '../services/firebase.firestore.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { FirebaseFirestoreService } from '../services/firebase.firestore.service
 })
 export class Tab3Page implements OnInit {
 
-  contactList!: Contact[];
+  contactList!: ContactModel[];
 
   searchFG!: FormGroup;
   @ViewChild('searchFGD') searchFGD!: FormGroupDirective;
@@ -34,7 +34,7 @@ export class Tab3Page implements OnInit {
             this.presentToast(`Contact not found: ${contact.name}`);
           }
 
-          this.contactList = result as Contact[];
+          this.contactList = result as ContactModel[];
         },
         error: (err) => {
           console.log(err);

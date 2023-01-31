@@ -3,7 +3,7 @@ import { FormGroup, FormGroupDirective, FormControl, Validators } from '@angular
 import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AlertController, LoadingController } from '@ionic/angular';
-import { Contact } from 'src/app/models/contact.model';
+import { ContactModel } from 'src/app/models/contact.model';
 import { FirebaseFirestorageService } from 'src/app/services/firebase-firestorage.service';
 import { FirebaseFirestoreService } from 'src/app/services/firebase.firestore.service';
 
@@ -13,13 +13,13 @@ import { FirebaseFirestoreService } from 'src/app/services/firebase.firestore.se
   styleUrls: ['./contact-details.page.scss'],
 })
 export class ContactDetailsPage implements OnInit {
-  contact!: Contact;
+  contact!: ContactModel;
   contactFormGroup!: FormGroup;
   @ViewChild('contactFormGroupDirective')
   formGroupDirective!: FormGroupDirective;
 
   constructor(
-    private firebaseService: FirebaseFirestoreService,
+    private firebaseFirestoreService: FirebaseFirestoreService,
     private firebaseFirestorageService: FirebaseFirestorageService,
     private activedRoute: ActivatedRoute,
     private router: Router,
@@ -30,8 +30,8 @@ export class ContactDetailsPage implements OnInit {
   ngOnInit(): void {
     const id = this.activedRoute.snapshot.paramMap.get('id');
 
-    this.firebaseService.find(id!).subscribe({
-      next: (data: Contact) => {
+    this.firebaseFirestoreService.findContact(id!).subscribe({
+      next: (data: ContactModel) => {
         if (!data) {
           this.router.navigateByUrl('/tabs/list');
         } else {
@@ -59,9 +59,9 @@ export class ContactDetailsPage implements OnInit {
 
   editContact(values: any) {
     // pegar todos os dados do formulário e transformar em um novo contato
-    let updateContact: Contact = { id: this.contact.id, ...values };
-    this.firebaseService
-      .update(updateContact)
+    let updateContact: ContactModel = { id: this.contact.id, ...values };
+    this.firebaseFirestoreService
+      .updateContact(updateContact)
       .then(() => this.router.navigateByUrl('/tabs/list'))
       .catch((err) => console.error(err));
 
@@ -69,7 +69,7 @@ export class ContactDetailsPage implements OnInit {
   }
 
   deleteContact() {
-    this.firebaseService
+    this.firebaseFirestoreService
       .delete(this.contact.id)
       .then(() => this.router.navigateByUrl('/tabs/list'))
       .catch((err) => console.error(err));
@@ -88,7 +88,7 @@ export class ContactDetailsPage implements OnInit {
       const loading = await this.loadingController.create();
       await loading.present();
 
-      const result = await this.firebaseFirestorageService.upload(image, this.contact.id);
+      const result = await this.firebaseFirestorageService.upload(image, 'contacts', this.contact.id);
 
       loading.dismiss();
 

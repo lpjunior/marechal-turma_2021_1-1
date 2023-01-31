@@ -3,12 +3,17 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import{ redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/auth-guard'
 
 const redirectUnauthorized = () => redirectUnauthorizedTo(['']);
-const redirectLoggedIn = () => redirectLoggedInTo(['tabs']);
+const redirectLoggedIn = () => redirectLoggedInTo(['perfil']);
 
 const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    ...canActivate(redirectUnauthorized)
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilPageModule),
     ...canActivate(redirectUnauthorized)
   },
   {
@@ -20,6 +25,10 @@ const routes: Routes = [
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   }
 ];
 @NgModule({
